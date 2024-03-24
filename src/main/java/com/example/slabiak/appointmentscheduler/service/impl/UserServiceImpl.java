@@ -62,7 +62,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @PreAuthorize("#customerId == principal.id or hasRole('ADMIN')")
     public Customer getCustomerById(int customerId) {
-        return customerRepository.getOne(customerId);
+        return customerRepository.getReferenceById(customerId); // .getOne(customerId);
     }
 
     @Override
