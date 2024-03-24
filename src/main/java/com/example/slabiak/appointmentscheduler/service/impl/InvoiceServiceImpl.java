@@ -96,7 +96,7 @@ public class InvoiceServiceImpl implements InvoiceService {
     @Override
     @PreAuthorize("hasRole('ADMIN')")
     public void changeInvoiceStatusToPaid(int invoiceId) {
-        Invoice invoice = invoiceRepository.getOne(invoiceId);
+        Invoice invoice = invoiceRepository.getReferenceById(invoiceId); //.getOne(invoiceId);
         invoice.setStatus("paid");
         invoiceRepository.save(invoice);
     }

@@ -13,6 +13,9 @@ import com.example.slabiak.appointmentscheduler.validation.groups.CreateProvider
 import com.example.slabiak.appointmentscheduler.validation.groups.CreateUser;
 import com.example.slabiak.appointmentscheduler.validation.groups.UpdateProvider;
 import com.example.slabiak.appointmentscheduler.validation.groups.UpdateUser;
+
+import jakarta.validation.Valid;
+
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,7 +24,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.validation.Valid;
+// import javax.validation.Valid;
 
 
 @Controller

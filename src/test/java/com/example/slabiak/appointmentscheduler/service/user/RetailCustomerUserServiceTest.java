@@ -169,7 +169,7 @@ public class RetailCustomerUserServiceTest {
         RetailCustomer customerToBeUpdated = new RetailCustomer();
         customerToBeUpdated.setId(userId);
 
-        doReturn(customerToBeUpdated).when(retailCustomerRepository).getOne(userId);
+        doReturn(customerToBeUpdated).when(retailCustomerRepository).getReferenceById(userId);//.getOne(userId);
 
         ArgumentCaptor<RetailCustomer> argumentCaptor = ArgumentCaptor.forClass(RetailCustomer.class);
         userService.updateRetailCustomerProfile(retailUserForm);
@@ -191,7 +191,7 @@ public class RetailCustomerUserServiceTest {
         customerToBeUpdated.setUserName(currentUsername);
         customerToBeUpdated.setPassword(currentPassword);
         customerToBeUpdated.setRoles(retailCustomerRoles);
-        doReturn(customerToBeUpdated).when(retailCustomerRepository).getOne(userId);
+        doReturn(customerToBeUpdated).when(retailCustomerRepository).getReferenceById(userId); // .getOne(userId);
 
         ArgumentCaptor<RetailCustomer> argumentCaptor = ArgumentCaptor.forClass(RetailCustomer.class);
         userService.updateRetailCustomerProfile(retailUserForm);

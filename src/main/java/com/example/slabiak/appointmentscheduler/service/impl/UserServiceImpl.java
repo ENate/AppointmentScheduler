@@ -143,7 +143,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @PreAuthorize("#passwordChangeForm.id == principal.id")
     public void updateUserPassword(ChangePasswordForm passwordChangeForm) {
-        User user = userRepository.getOne(passwordChangeForm.getId());
+        User user = userRepository.getReferenceById(passwordChangeForm.getId()); // .getOne(passwordChangeForm.getId());
         user.setPassword(passwordEncoder.encode(passwordChangeForm.getPassword()));
         userRepository.save(user);
     }
@@ -151,7 +151,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @PreAuthorize("#updateData.id == principal.id or hasRole('ADMIN')")
     public void updateProviderProfile(UserForm updateData) {
-        Provider provider = providerRepository.getOne(updateData.getId());
+        Provider provider = providerRepository.getReferenceById(updateData.getId());//.getOne(updateData.getId());
         provider.update(updateData);
         providerRepository.save(provider);
     }
@@ -159,7 +159,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @PreAuthorize("#updateData.id == principal.id or hasRole('ADMIN')")
     public void updateRetailCustomerProfile(UserForm updateData) {
-        RetailCustomer retailCustomer = retailCustomerRepository.getOne(updateData.getId());
+        RetailCustomer retailCustomer = retailCustomerRepository.getReferenceById(updateData.getId()); //.getOne(updateData.getId());
         retailCustomer.update(updateData);
         retailCustomerRepository.save(retailCustomer);
 
@@ -168,7 +168,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @PreAuthorize("#updateData.id == principal.id or hasRole('ADMIN')")
     public void updateCorporateCustomerProfile(UserForm updateData) {
-        CorporateCustomer corporateCustomer = corporateCustomerRepository.getOne(updateData.getId());
+        CorporateCustomer corporateCustomer = corporateCustomerRepository.getReferenceById(updateData.getId()); //.getOne(updateData.getId());
         corporateCustomer.update(updateData);
         corporateCustomerRepository.save(corporateCustomer);
 
@@ -195,7 +195,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Collection<Role> getRolesForRetailCustomer() {
-        HashSet<Role> roles = new HashSet();
+        HashSet<Role> roles = new HashSet<>();
         roles.add(roleRepository.findByName("ROLE_CUSTOMER_RETAIL"));
         roles.add(roleRepository.findByName("ROLE_CUSTOMER"));
         return roles;
@@ -204,7 +204,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Collection<Role> getRoleForCorporateCustomers() {
-        HashSet<Role> roles = new HashSet();
+        HashSet<Role> roles = new HashSet<>();
         roles.add(roleRepository.findByName("ROLE_CUSTOMER_CORPORATE"));
         roles.add(roleRepository.findByName("ROLE_CUSTOMER"));
         return roles;
@@ -212,7 +212,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Collection<Role> getRolesForProvider() {
-        HashSet<Role> roles = new HashSet();
+        HashSet<Role> roles = new HashSet<>();
         roles.add(roleRepository.findByName("ROLE_PROVIDER"));
         return roles;
     }
