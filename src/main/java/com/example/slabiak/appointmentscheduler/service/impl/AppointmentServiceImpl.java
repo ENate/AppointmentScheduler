@@ -144,7 +144,7 @@ public class AppointmentServiceImpl implements AppointmentService {
 
     @Override
     public List<TimePeroid> calculateAvailableHours(List<TimePeroid> availableTimePeroids, Work work) {
-        ArrayList<TimePeroid> availableHours = new ArrayList();
+        ArrayList<TimePeroid> availableHours = new ArrayList<>();
         for (TimePeroid peroid : availableTimePeroids) {
             TimePeroid workPeroid = new TimePeroid(peroid.getStart(), peroid.getStart().plusMinutes(work.getDuration()));
             while (workPeroid.getEnd().isBefore(peroid.getEnd()) || workPeroid.getEnd().equals(peroid.getEnd())) {
@@ -159,7 +159,7 @@ public class AppointmentServiceImpl implements AppointmentService {
     @Override
     public List<TimePeroid> excludeAppointmentsFromTimePeroids(List<TimePeroid> peroids, List<Appointment> appointments) {
 
-        List<TimePeroid> toAdd = new ArrayList();
+        List<TimePeroid> toAdd = new ArrayList<>();
         Collections.sort(appointments);
         for (Appointment appointment : appointments) {
             for (TimePeroid peroid : peroids) {
@@ -228,7 +228,7 @@ public class AppointmentServiceImpl implements AppointmentService {
 
     @Override
     public void cancelUserAppointmentById(int appointmentId, int userId) {
-        Appointment appointment = appointmentRepository.getOne(appointmentId);
+        Appointment appointment = appointmentRepository.getReferenceById(appointmentId); //.getOne(appointmentId);
         if (appointment.getCustomer().getId() == userId || appointment.getProvider().getId() == userId) {
             appointment.setStatus(AppointmentStatus.CANCELED);
             User canceler = userService.getUserById(userId);

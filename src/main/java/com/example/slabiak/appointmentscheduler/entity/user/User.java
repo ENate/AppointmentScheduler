@@ -4,7 +4,17 @@ import com.example.slabiak.appointmentscheduler.entity.BaseEntity;
 import com.example.slabiak.appointmentscheduler.entity.Notification;
 import com.example.slabiak.appointmentscheduler.model.UserForm;
 
-import javax.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import jakarta.persistence.JoinColumn;
+// import javax.persistence.*;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;

@@ -10,7 +10,7 @@ public class DayPlan {
     private List<TimePeroid> breaks;
 
     public DayPlan() {
-        breaks = new ArrayList();
+        breaks = new ArrayList<>();
     }
 
     public List<TimePeroid> timePeroidsWithBreaksExcluded() {
@@ -19,7 +19,7 @@ public class DayPlan {
         List<TimePeroid> breaks = getBreaks();
 
         if (!breaks.isEmpty()) {
-            ArrayList<TimePeroid> toAdd = new ArrayList();
+            ArrayList<TimePeroid> toAdd = new ArrayList<>();
             for (TimePeroid break1 : breaks) {
                 if (break1.getStart().isBefore(workingHours.getStart())) {
                     break1.setStart(workingHours.getStart());

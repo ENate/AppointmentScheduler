@@ -10,6 +10,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import java.nio.charset.StandardCharsets;
+import java.security.Key;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -32,7 +34,7 @@ public class JwtTokenServiceImpl implements JwtTokenService {
         return Jwts.builder()
                 .claim("appointmentId", appointment.getId())
                 .claim("customerId", appointment.getCustomer().getId())
-                .setExpiration(expiryDate)
+                .expiration(expiryDate)
                 .signWith(SignatureAlgorithm.HS512, jwtSecret)
                 .compact();
     }
@@ -92,5 +94,10 @@ public class JwtTokenServiceImpl implements JwtTokenService {
         ZoneOffset zoneOffSet = zone.getRules().getOffset(localDateTime);
         Instant instant = localDateTime.toInstant(zoneOffSet);
         return Date.from(instant);
+    }
+
+    private Key getSigningKey() {
+        byte[] keyBytes = this.jwtSecret.getBytes(StandardCharsets.UTF_8);
+        return Keys.hmacShaKeyFor(keyBytes);
     }
 }
