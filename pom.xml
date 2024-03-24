@@ -16,6 +16,9 @@
 
 	<properties>
 		<java.version>21</java.version>
+		<maven.compiler.source>21</maven.compiler.source>
+		<maven.compiler.target>21</maven.compiler.target>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
 	<dependencies>
@@ -105,7 +108,7 @@
 		<dependency>
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
-			<version>23.0</version>
+			<version>33.1.0-jre</version>
 		</dependency>
 
 		<dependency>
@@ -154,7 +157,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-failsafe-plugin</artifactId>
-				<version>3.0.0-M4</version>
+				<version>3.2.5</version>
 				<executions>
 					<execution>
 						<phase>package</phase>
@@ -189,7 +192,7 @@
 			<plugin>
 				<groupId>com.google.cloud.tools</groupId>
 				<artifactId>jib-maven-plugin</artifactId>
-				<version>1.8.0</version>
+				<version>3.4.1</version>
 				<configuration>
 					<to>
 						<image>docker.io/slabiak/appointmentscheduler:${project.version}</image>
