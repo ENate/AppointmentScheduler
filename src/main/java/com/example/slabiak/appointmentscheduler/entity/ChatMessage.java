@@ -2,7 +2,13 @@ package com.example.slabiak.appointmentscheduler.entity;
 
 import com.example.slabiak.appointmentscheduler.entity.user.User;
 
-import javax.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+
+//import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity

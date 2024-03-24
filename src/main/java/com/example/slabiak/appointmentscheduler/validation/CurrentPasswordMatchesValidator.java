@@ -3,11 +3,15 @@ package com.example.slabiak.appointmentscheduler.validation;
 import com.example.slabiak.appointmentscheduler.entity.user.User;
 import com.example.slabiak.appointmentscheduler.model.ChangePasswordForm;
 import com.example.slabiak.appointmentscheduler.service.UserService;
+
+import jakarta.validation.ConstraintValidator;
+import jakarta.validation.ConstraintValidatorContext;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import javax.validation.ConstraintValidator;
-import javax.validation.ConstraintValidatorContext;
+// import javax.validation.ConstraintValidator;
+// import javax.validation.ConstraintValidatorContext;
 
 public class CurrentPasswordMatchesValidator implements ConstraintValidator<CurrentPasswordMatches, Object> {
 

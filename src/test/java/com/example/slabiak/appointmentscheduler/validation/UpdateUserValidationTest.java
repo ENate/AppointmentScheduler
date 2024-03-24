@@ -2,16 +2,24 @@ package com.example.slabiak.appointmentscheduler.validation;
 
 import com.example.slabiak.appointmentscheduler.model.UserForm;
 import com.example.slabiak.appointmentscheduler.validation.groups.UpdateUser;
+
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.Validation;
+import jakarta.validation.Validator;
+import jakarta.validation.ValidatorFactory;
+
 import org.junit.Before;
 import org.junit.Test;
 
-import javax.validation.ConstraintViolation;
-import javax.validation.Validation;
-import javax.validation.Validator;
-import javax.validation.ValidatorFactory;
-import java.util.Set;
+// import javax.validation.ConstraintViolation;
+// import javax.validation.Validation;
+// import javax.validation.Validator;
+// import javax.validation.ValidatorFactory;
+// import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
+
+import java.util.Set;
 
 public class UpdateUserValidationTest {
 

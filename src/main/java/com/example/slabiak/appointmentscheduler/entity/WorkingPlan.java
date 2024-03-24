@@ -4,12 +4,22 @@ import com.example.slabiak.appointmentscheduler.entity.user.User;
 import com.example.slabiak.appointmentscheduler.entity.user.provider.Provider;
 import com.example.slabiak.appointmentscheduler.model.DayPlan;
 import com.example.slabiak.appointmentscheduler.model.TimePeroid;
-import com.vladmihalcea.hibernate.type.json.JsonStringType;
-import org.hibernate.annotations.Type;
-import org.hibernate.annotations.TypeDef;
-import org.hibernate.annotations.TypeDefs;
 
-import javax.persistence.*;
+import io.hypersistence.utils.hibernate.type.json.JsonStringType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.MapsId;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
+
+//import com.vladmihalcea.hibernate.type.json.JsonStringType;
+// import org.hibernate.annotations.Type;
+// import org.hibernate.annotations.TypeDef;
+// import org.hibernate.annotations.TypeDefs;
+
+//import javax.persistence.*;
 import java.time.LocalTime;
 
 @TypeDefs(@TypeDef(name = "json", typeClass = JsonStringType.class))
