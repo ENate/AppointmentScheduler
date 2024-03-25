@@ -53,6 +53,7 @@ public class SecurityConfig {
                 .requestMatchers("/appointments/**").hasAnyRole("CUSTOMER", "PROVIDER", "ADMIN")
                 .requestMatchers("/invoices/**").hasAnyRole("CUSTOMER", "PROVIDER", "ADMIN")
                 .anyRequest().authenticated())
+                .authenticationProvider(authenticationProvider()) // check Builder
                 .formLogin(form -> form
                     .loginPage("/login")
                     .loginProcessingUrl("perform_login")
