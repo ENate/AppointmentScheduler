@@ -33,7 +33,15 @@ public class SecurityConfig {
             .authorizeHttpRequests(
                 authorize -> authorize
                 .requestMatchers("/actuator/").permitAll()
-                .anyRequest().authenticated());
+                .anyRequest().authenticated())
+                .formLogin(form -> form
+                    .loginPage("/login")
+                    .loginProcessingUrl("perform_login")
+                    .successHandler(customAuthenticationSuccessHandler).permitAll())
+                .logout(logout -> logout
+                    .logoutUrl("/perform_logout"))
+                .exceptionHandling(ex -> ex 
+                    .accessDeniedPage("/access-denied"));
         return http.build();
     }
 
