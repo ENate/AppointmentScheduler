@@ -5,7 +5,9 @@ import com.example.slabiak.appointmentscheduler.service.JwtTokenService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+// import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.io.Decoders;
+import io.jsonwebtoken.security.Keys;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -18,11 +20,14 @@ import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.util.Date;
 
+import javax.crypto.SecretKey;
+
 @Slf4j
 @Component
 public class JwtTokenServiceImpl implements JwtTokenService {
 
     private String jwtSecret;
+    SecretKey secret = Keys.hmacShaKeyFor(Decoders.BASE64.decode(jwtSecret));
 
     public JwtTokenServiceImpl(@Value(value = "${app.jwtSecret}") String jwtSecret) {
         this.jwtSecret = jwtSecret;
@@ -35,7 +40,8 @@ public class JwtTokenServiceImpl implements JwtTokenService {
                 .claim("appointmentId", appointment.getId())
                 .claim("customerId", appointment.getCustomer().getId())
                 .expiration(expiryDate)
-                .signWith(SignatureAlgorithm.HS512, jwtSecret)
+                .signWith(secret)
+                //.signWith(SignatureAlgorithm.HS512, jwtSecret)
                 .compact();
     }
 
@@ -44,7 +50,8 @@ public class JwtTokenServiceImpl implements JwtTokenService {
         return Jwts.builder()
                 .claim("appointmentId", appointment.getId())
                 .claim("providerId", appointment.getProvider().getId())
-                .signWith(SignatureAlgorithm.HS512, jwtSecret)
+                .signWith(secret)
+                //.signWith(SignatureAlgorithm.HS512, jwtSecret)
                 .compact();
     }
 
@@ -52,7 +59,8 @@ public class JwtTokenServiceImpl implements JwtTokenService {
     @Override
     public boolean validateToken(String token) {
         try {
-            Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token);
+            Jwts.parser().verifyWith(secret).build().parseSignedClaims(token);
+            // Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token);
             return true;
         } catch (JwtException e) {
             log.error("Error while token {} validation, error is {}", token, e.getMessage());
@@ -64,27 +72,39 @@ public class JwtTokenServiceImpl implements JwtTokenService {
     @Override
     public int getAppointmentIdFromToken(String token) {
         Claims claims = Jwts.parser()
-                .setSigningKey(jwtSecret)
-                .parseClaimsJws(token)
-                .getBody();
+                //.setSigningKey(jwtSecret)
+                .verifyWith(secret)
+                .build()
+                .parseSignedClaims(token)
+                // .parseClaimsJws(token)
+                .getPayload();
+                //.getBody();
         return (int) claims.get("appointmentId");
     }
 
     @Override
     public int getCustomerIdFromToken(String token) {
         Claims claims = Jwts.parser()
-                .setSigningKey(jwtSecret)
-                .parseClaimsJws(token)
-                .getBody();
+                //.setSigningKey(jwtSecret)
+                .verifyWith(secret)
+                //.parseClaimsJws(token)
+                .build()
+                .parseSignedClaims(token)
+                //.getBody();
+                .getPayload();
         return (int) claims.get("customerId");
     }
 
     @Override
     public int getProviderIdFromToken(String token) {
         Claims claims = Jwts.parser()
-                .setSigningKey(jwtSecret)
-                .parseClaimsJws(token)
-                .getBody();
+                // .setSigningKey(jwtSecret)
+                .verifyWith(secret)
+                .build()
+                //.parseClaimsJws(token)
+                .parseSignedClaims(token)
+                // .getBody();
+                .getPayload();
         return (int) claims.get("providerId");
     }
 
