@@ -7,7 +7,7 @@ import com.example.slabiak.appointmentscheduler.service.UserService;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
-import org.springframework.beans.factory.annotation.Autowired;
+// import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 // import javax.validation.ConstraintValidator;
@@ -15,11 +15,17 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 public class CurrentPasswordMatchesValidator implements ConstraintValidator<CurrentPasswordMatches, Object> {
 
-    @Autowired
+    //@Autowired
     private PasswordEncoder passwordEncoder;
 
-    @Autowired
+    //@Autowired
     private UserService userService;
+    public CurrentPasswordMatchesValidator(
+        PasswordEncoder passwordEncoder,
+        UserService userService) {
+            this.userService = userService;
+            this.passwordEncoder = passwordEncoder;
+        }
 
     @Override
     public void initialize(final CurrentPasswordMatches constraintAnnotation) {
