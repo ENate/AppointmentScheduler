@@ -6,15 +6,19 @@ import com.example.slabiak.appointmentscheduler.service.UserService;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
-import org.springframework.beans.factory.annotation.Autowired;
+// import org.springframework.beans.factory.annotation.Autowired;
 
 //import javax.validation.ConstraintValidator;
 //import javax.validation.ConstraintValidatorContext;
 //
 public class UniqueUsernameValidator implements ConstraintValidator<UniqueUsername, Object> {
 
-    @Autowired
-    private UserService userService;
+
+    private final UserService userService;
+
+    public UniqueUsernameValidator(UserService userService) {
+        this.userService = userService;
+    }
 
     @Override
     public void initialize(final UniqueUsername constraintAnnotation) {

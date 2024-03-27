@@ -23,6 +23,14 @@
 	</properties>
 
 	<dependencies>
+		<!-- Spring Boot docker compose dependency -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-docker-compose</artifactId>
+                <scope>runtime</scope>
+                <optional>true</optional>
+		</dependency>
+		<!--End Spring Boot docker compose dependency -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>

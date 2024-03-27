@@ -1,19 +1,21 @@
-version: '3.7'
+version: '3.9'
 
 services:
 
   backend:
-    image: slabiak/appointmentscheduler:0.0.1-SNAPSHOT
+    image: AppointmentScheduler/target/appointmentscheduler-1.0.5
+    # slabiak/appointmentscheduler:0.0.1-SNAPSHOT
     ports:
       - "8080:8080"
     restart: always
     depends_on:
       - appointmentscheduler_db
-    networks:
-      - appointmentscheduler_network
+    #networks:
+    #  - appointmentscheduler_network
 
   appointmentscheduler_db:
     image: mysql:5.7
+    container_name: apscheduler
     ports:
       - "3306:3306"
     restart: always
@@ -25,11 +27,11 @@ services:
     volumes:
       - appointmentscheduler_volume:/var/lib/mysql
       - ./src/main/resources:/docker-entrypoint-initdb.d
-    networks:
-      - appointmentscheduler_network
+    #networks:
+    #  - appointmentscheduler_network
 
 volumes:
   appointmentscheduler_volume:
 
-networks:
-  appointmentscheduler_network:
+#networks:
+#  appointmentscheduler_network:
