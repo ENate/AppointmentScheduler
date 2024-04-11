@@ -14,7 +14,7 @@ import jakarta.validation.ConstraintValidatorContext;
 public class UniqueUsernameValidator implements ConstraintValidator<UniqueUsername, Object> {
 
 
-    private final UserService userService;
+    private UserService userService;
 
     public UniqueUsernameValidator(UserService userService) {
         this.userService = userService;

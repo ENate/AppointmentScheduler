@@ -45,7 +45,8 @@ public class LoginPageIT {
 
     @Test
     public void shouldShowLoginPageAndSuccessfullyLoginToAdminAccountUsingAdminCredentials() {
-        RemoteWebDriver driver = chrome.getWebDriver();
+        // RemoteWebDriver driver = chrome.getWebDriver();
+        RemoteWebDriver driver = new RemoteWebDriver(chrome.getSeleniumAddress(), new ChromeOptions());
         String url = "http://host.testcontainers.internal:" + port + "/";
         driver.get(url);
 
@@ -62,7 +63,8 @@ public class LoginPageIT {
 
     @Test
     public void shouldLoginAsRetailCustomerAndSuccessfullyBookNewAppointment() {
-        RemoteWebDriver driver = chrome.getWebDriver();
+        RemoteWebDriver driver = new RemoteWebDriver(chrome.getSeleniumAddress(), new ChromeOptions());
+        // RemoteWebDriver driver = chrome.getWebDriver();
         String url = "http://host.testcontainers.internal:" + port + "/";
 
         driver.get(url);
